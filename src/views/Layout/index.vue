@@ -16,7 +16,6 @@ onMounted(() => categoryStore.getCategory());
   <LayoutFixed />
   <LayoutNav />
   <LayoutHeader />
-  <div style="height: 300px">this is center</div>
   <RouterView />
   <LayoutFooter />
 </template>
