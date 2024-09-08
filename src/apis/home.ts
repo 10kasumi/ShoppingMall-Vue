@@ -19,3 +19,18 @@ export const getHotAPI = () => {
         params: {}
     })
 }
+
+export const getGoodsAPI = () => {
+    return http({
+        url: '/home/goods'
+    })
+}
+
+export const getDetail = (id: number) => {
+    return http({
+        url: '/goods',
+        params: {
+            id
+        }
+    })
+}
