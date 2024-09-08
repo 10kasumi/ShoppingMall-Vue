@@ -5,14 +5,18 @@ import { useRoute } from "vue-router";
 
 import { getBannerAPI } from "@/apis/home";
 import GoodsItem from "../Home/components/GoodsItem.vue";
+import { onBeforeRouteUpdate } from "vue-router";
 
 const route = useRoute();
 const categoryData = ref({});
-const getCategory = async () => {
-  const res = await getCategoryAPI(route.params.id);
+const getCategory = async (id = route.params.id) => {
+  const res = await getCategoryAPI(id);
   categoryData.value = res.result;
 };
 onMounted(() => getCategory());
+onBeforeRouteUpdate((to) => {
+  getCategory(to.params.id);
+});
 
 const bannerList = ref([]);
 const getBanner = async () => {
@@ -21,9 +25,7 @@ const getBanner = async () => {
   });
   bannerList.value = res.result;
 };
-onMounted(() => {
-  getBanner();
-});
+onMounted(() => getBanner());
 </script>
 
 <template>
