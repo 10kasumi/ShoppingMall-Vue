@@ -25,12 +25,3 @@ export const getGoodsAPI = () => {
         url: '/home/goods'
     })
 }
-
-export const getDetail = (id: number) => {
-    return http({
-        url: '/goods',
-        params: {
-            id
-        }
-    })
-}
