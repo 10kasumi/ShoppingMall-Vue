@@ -4,7 +4,7 @@ import { getDetail } from "@/apis/detail";
 import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
 import { ElMessage } from "element-plus";
-import { useCartStore } from "@/stores/carStore";
+import { useCartStore } from "@/stores/cartStore";
 
 const cartStore = useCartStore();
 const goods = ref({});
