@@ -20,6 +20,7 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(res => res.data, e => {
     const userStore = useUserStore()
+    console.log(e)
     ElMessage({
         type: 'warning',
         message: e.response.data.message

@@ -19,7 +19,6 @@ const enterhandler = (i) => {
 //获取鼠标相对位置
 const target = ref(null);
 const { elementX, elementY, isOutside } = useMouseInElement(target);
-console.log(elementX, elementY, isOutside);
 const left = ref(0);
 const top = ref(0);
 const positionX = ref(0);

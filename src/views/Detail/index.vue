@@ -12,12 +12,12 @@ const route = useRoute();
 const getGoods = async () => {
   const res = await getDetail(route.params.id);
   goods.value = res.result;
+  console.log(goods.value);
 };
 onMounted(() => getGoods());
 
 let skuObj = {};
 const skuChange = (sku) => {
-  console.log(sku);
   skuObj = sku;
 };
 
@@ -25,7 +25,7 @@ const count = ref(1);
 const countChange = (count) => {};
 
 const addCart = () => {
-  if (skuObj.skuId) {
+  if (skuObj.skuId || goods.value.skus.length === 1) {
     //选择了规格
     cartStore.addCart({
       id: goods.value.id,
