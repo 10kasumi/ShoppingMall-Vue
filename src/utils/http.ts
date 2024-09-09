@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { ElMessage } from "element-plus";
+import 'element-plus/theme-chalk/el-message.css'
 
 const http = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -10,6 +12,10 @@ http.interceptors.request.use(config => {
 }, e => Promise.reject(e))
 
 http.interceptors.response.use(res => res.data, e => {
+    ElMessage({
+        type: 'warning',
+        message: e.response.data.message
+    })
     return Promise.reject(e)
 })
 export default http
