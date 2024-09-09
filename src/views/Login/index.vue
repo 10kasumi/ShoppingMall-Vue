@@ -4,6 +4,7 @@ import { loginAPI } from "@/apis/user";
 import { ElMessage } from "element-plus";
 import "element-plus/theme-chalk/el-message.css";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
 
 const form = ref({
   account: "",
@@ -31,12 +32,13 @@ const rules = {
 
 const formRef = ref(null);
 const router = useRouter();
+const userStore = useUserStore();
 const doLogin = () => {
   const { account, password } = form.value;
   formRef.value.validate(async (valid) => {
     //表单所有相通过校验valid为true
     if (valid) {
-      const res = await loginAPI({ account, password });
+      await userStore.getUserInfo({ account, password });
       ElMessage({ type: "success", message: "登录成功" });
       router.replace({ path: "/" });
     }
