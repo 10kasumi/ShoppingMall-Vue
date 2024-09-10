@@ -8,12 +8,16 @@ export const useCartStore = defineStore('cart', () => {
     const userStore = useUserStore()
     const isLogin = computed(() => userStore.userInfo.token)
 
+    const updateNewList = async () => {
+        const res = await findUserCartAPI()
+        cartList.value = res.result
+    }
+
     const addCart = async (goods) => {
         const { skuId, count } = goods
         if (isLogin.value) {
             await insertCartAPI({ skuId, count })
-            const res = await findUserCartAPI()
-            cartList.value = res.result
+            updateNewList()
         } else {
             const item = cartList.value.find((item) => goods.skuId === item.skuId)
             if (item) {
@@ -27,8 +31,7 @@ export const useCartStore = defineStore('cart', () => {
     const deleteCart = async (skuId) => {
         if (isLogin.value) {
             await deleteCartAPI([skuId])
-            const res = await findUserCartAPI()
-            cartList.value = res.result
+            updateNewList
         } else {
             const index = cartList.value.findIndex((item) => item.skuId === skuId)
             cartList.value.splice(index, 1)
@@ -37,6 +40,11 @@ export const useCartStore = defineStore('cart', () => {
     const removeCart = (skuId) => {
         const index = cartList.value.findIndex((item) => item.skuId === skuId)
         cartList.value.splice(index, 1)
+    }
+
+    //清除本地购物车
+    const clearCart = () => {
+        cartList.value = []
     }
 
     const singleCheck = (skuId, isSelected) => {
@@ -58,10 +66,13 @@ export const useCartStore = defineStore('cart', () => {
 
     return {
         cartList,
+        updateNewList,
         addCart,
         removeCart,
         singleCheck,
         allCheck,
+        deleteCart,
+        clearCart,
         allCount,
         allPrice,
         allSelected,
