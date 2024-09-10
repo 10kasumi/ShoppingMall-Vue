@@ -6,7 +6,7 @@ import router from '@/router'
 
 const http = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
-    timeout: 7000
+    timeout: 10000
 })
 
 http.interceptors.request.use(config => {
