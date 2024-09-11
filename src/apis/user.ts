@@ -1,6 +1,6 @@
 import http from '@/utils/http'
 
-export const loginAPI = ({ account, password }) => {
+export const loginAPI = ({ account, password }: { account: string, password: string }) => {
     return http({
         url: '/login',
         method: 'post',

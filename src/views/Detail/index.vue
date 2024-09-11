@@ -25,7 +25,7 @@ const count = ref(1);
 const countChange = (count) => {};
 
 const addCart = () => {
-  if (skuObj.skuId || goods.value.skus.length === 1) {
+  if (skuObj.skuId) {
     //选择了规格
     cartStore.addCart({
       id: goods.value.id,

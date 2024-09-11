@@ -1,8 +1,8 @@
 import http from "@/utils/http"
+import type { Result } from './model/type'
 
-export function getBannerAPI(params = {}) {
+export const getBannerAPI = (distributionSite: string = '1'): Promise<Result> => {
     //默认1，商品2
-    const { distributionSite = '1' } = params
     return http({
         url: '/home/banner',
         params: {
